@@ -8,6 +8,13 @@ function daysUntil(dateStr) {
 }
 
 export default function DueBadge({ dueDate }) {
+  const d = daysUntil(dueDate)
  
-  return <span className="badge">Label here</span>;
+  return <>
+    {d < 0?<span className="badge danger">Overdue</span>:
+    d === 0?<span className="badge warn">Due today</span>:
+    d === 1?<span className="badge">1 day remaining</span>:
+    `${d} days remaining`  
+    }
+  </>;
 }

@@ -18,12 +18,25 @@ export default function CourseCard({ course, index, onMutateCourse }) {
    
   }
 
+  const allTasksDone = course.tasks.every(task => task.isDone);
+
   return (
     <article className="course card">
       <header className="cardHeader">
         <h2>{course.title}</h2>
- 
+        {allTasksDone && <span>All caught up</span>}
       </header>
+
+      <ul className="tasks">
+        {course.tasks.lenght?course.tasks.map((task)=>{
+          <TaskItem 
+            key={task.id}
+            task={task}
+            onToggle={toggleTask}
+            onDelete={deleteTask}
+          />
+        }): <span>No tasks yet. Add your first one below.</span>}
+      </ul>
 
     
       <form onSubmit={addTask} className="newTask">
